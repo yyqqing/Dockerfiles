@@ -27,10 +27,6 @@ RUN apk --update add --virtual build-dependencies \
 # Add kafka-mesos & kafka
 COPY ./kafka* /opt/kafka-mesos/
 
-RUN apk add --update expat && \
-	ln -s /opt/kafka-mesos/kafka-mesos-${KAFKA_MESOS_VERSION}.jar /opt/kafka-mesos/kafka-mesos.jar && \
-	ln -s /opt/kafka-mesos/libmesos-0.28.1.so /usr/lib/libmesos.so
-
 WORKDIR /opt/kafka-mesos
 EXPOSE 7000
 
