@@ -1,5 +1,5 @@
 # Intro
-A docker image modified from [mesos/kafka](https://github.com/mesos/kafka), built on Oracle JRE 8 in Alpine;
+A docker image modified from [mesos/kafka](https://github.com/mesos/kafka/tree/master/src/docker), built on Oracle JRE 8 in Alpine;
 
 `/opt/kafka-mesos` folder will contain following content:
 - kafka*.tgz - kafka distro;
