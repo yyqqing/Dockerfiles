@@ -4,6 +4,7 @@ ENV KAFKA_VERSION=0.9.0.1 KAFKA_SCALA_VERSION=2.11 KAFKA_MESOS_VERSION=0.9.5.1
 
 # Add kafka-mesos & kafka
 COPY ./kafka* /opt/kafka-mesos/
+COPY ./libmesos-0.28.1.so /usr/lib/libmesos.so
 
 RUN ln -s /opt/kafka-mesos/kafka-mesos-${KAFKA_MESOS_VERSION}.jar /opt/kafka-mesos/kafka-mesos.jar
 
