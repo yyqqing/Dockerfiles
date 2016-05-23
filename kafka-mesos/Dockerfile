@@ -8,4 +8,4 @@ COPY ./kafka* /opt/kafka-mesos/
 WORKDIR /opt/kafka-mesos
 EXPOSE 7000
 
-ENTRYPOINT ["java", "-jar", "/opt/kafka-mesos/kafka-mesos-$KAFKA_MESOS_VERSION.jar", "scheduler"]
+ENTRYPOINT ["java", "-jar", "/opt/kafka-mesos/kafka-mesos-${KAFKA_MESOS_VERSION}.jar", "scheduler"]
