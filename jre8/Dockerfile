@@ -12,8 +12,10 @@ RUN apk upgrade --update && \
     ## 设置时区
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
+    echo "${TIMEZONE}" > /etc/TZ && \
     echo "export LANG=${LANG}" > /etc/profile.d/locale.sh && \
     apk del tzdata && rm -v /var/cache/apk/* && \
-    ntpd -d -q -n -p uk.pool.ntp.org
+    echo '#!/bin/sh' > /etc/periodic/daily/ntp && \
+    echo 'ntpd -d -q -n -p uk.pool.ntp.org' >> /etc/periodic/daily/ntp
 
 # EOF
