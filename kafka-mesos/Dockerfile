@@ -25,7 +25,7 @@ RUN apk --update add --virtual build-dependencies \
 # && apk del build-dependencies
 
 # Add kafka-mesos & kafka
-COPY ./kafka* ./libmesos-0.28.1.so /opt/kafka-mesos/
+COPY ./kafka* /opt/kafka-mesos/
 
 RUN apk add --update expat && \
 	ln -s /opt/kafka-mesos/kafka-mesos-${KAFKA_MESOS_VERSION}.jar /opt/kafka-mesos/kafka-mesos.jar && \
