@@ -1,4 +1,4 @@
-FROM registry.docker.singbada.cn:5000/xbdhub/jre8:latest
+FROM yyqqing/jre8:latest
 
 # Tomcat Version
 ENV TOMCAT_VERSION_MAJOR=8 \
