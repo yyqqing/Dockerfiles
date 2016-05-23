@@ -17,5 +17,5 @@ RUN apk upgrade --update && \
     apk del tzdata && rm -v /var/cache/apk/* && \
     echo '#!/bin/sh' > /etc/periodic/daily/ntp && \
     echo 'ntpd -d -q -n -p uk.pool.ntp.org' >> /etc/periodic/daily/ntp
-    
+
 # EOF
