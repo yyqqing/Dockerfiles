@@ -1,9 +1,5 @@
 # Intro
-A docker image could be built with `build-image.sh` script.
-
-The image will have following pre-installed components:
-- openjdk-jdk;
-- mesos native libs;
+A docker image modified from mesos/kafka-mesos, built on Oracle JRE 8 in Alpine;
 
 `/opt/kafka-mesos` folder will contain following content:
 - kafka*.tgz - kafka distro;
@@ -13,30 +9,13 @@ The image will have following pre-installed components:
 No default configuration file for kafka-mesos is provided. All configuration params should be
 specified via cli options.
 
-# Building image
-Building image is done by `build-image.sh` script. Please refer to help via `./build-image.sh -h`.
-
-Example:
-```
-# ./build-image.sh
-```
-Note: this would not push the image. Push should be done manually after testing.
-
-## Using docker-machine
-If you have docker-machine installed, with virtualbox, you can run the following commands:
-```
-$ docker-machine create --driver virtualbox dev
-$ eval "$(docker-machine env dev)"
-$ ./build-image.sh
-```
-
 # Running image
 Running image using docker. Required networking params should be provided. Image has no entry point,
 so ./kafka-mesos.sh should be specified explicitly.
 
 Example:
 ```
-# sudo docker run -it -p 7000:7000 --add-host=master:192.168.3.5 `whoami`/kafka-mesos ./kafka-mesos.sh scheduler \
+# sudo docker run -it -p 7000:7000 --add-host=master:192.168.3.5 yyqqing/kafka-mesos ./kafka-mesos.sh scheduler \
 --master=master:5050 --zk=master:2181 --api=http://<accessible-ip>:7000 --storage=zk:/kafka-mesos
 ```
 Where accessible-ip - is the IP address of running host, accessible from mesos nodes.
