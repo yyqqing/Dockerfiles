@@ -9,26 +9,27 @@ ENV KAFKA_VERSION=0.9.0.1 \
 COPY ./kafka* /opt/kafka-mesos/
 
 RUN apk --update add --virtual build-dependencies \
-   curl \
    make \
    patch \
    g++ \
    subversion-dev \
    zlib-dev \
+   curl \
    curl-dev \
    apr-dev \
    cyrus-sasl-dev \
-   cyrus-sasl-crammd5 \
- && mkdir -p /tmp/target \
- && ln -s /opt/kafka-mesos/kafka-mesos-$KAFKA_MESOS_VERSION.jar /opt/kafka-mesos/kafka-mesos.jar \
+   cyrus-sasl-crammd5
+
+RUN mkdir -p /tmp/target \
  && curl -L http://www.apache.org/dist/mesos/$MESOS_VERSION/mesos-$MESOS_VERSION.tar.gz \
   | gunzip \
-  | tar x -C /tmp/ \
- && cd /tmp/mesos-$MESOS_VERSION \
- && ./configure --disable-java --disable-python --disable-shared --prefix /tmp/target \
+  | tar x -C /tmp/
+
+RUN cd /tmp/mesos-$MESOS_VERSION && ./configure --disable-java --disable-python --disable-shared --prefix /tmp/target && make && make install \
  && rm -rf /tmp/* \
  && rm -rf /var/cache/apk/* \
- && apk del build-dependencies
+ && apk del build-dependencies \
+ && ln -s /opt/kafka-mesos/kafka-mesos-$KAFKA_MESOS_VERSION.jar /opt/kafka-mesos/kafka-mesos.jar
 
 WORKDIR /opt/kafka-mesos
 EXPOSE 7000
