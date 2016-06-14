@@ -2,7 +2,7 @@
 jar='kafka-mesos*.jar'
 
 check_jar() {
-    jars=$(find . -maxdepth 1 -name "$jar" | wc -l)
+    jars=$(find . -maxdepth 1 -type f -name "$jar" | wc -l)
 
     if [ $jars -eq 0 ]
     then
