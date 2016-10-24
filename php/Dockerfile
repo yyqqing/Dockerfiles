@@ -8,8 +8,9 @@ ENV TZ=Asia/Shanghai
 RUN mv /etc/localtime /etc/localtime_old && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apk upgrade --update && apk add --no-cache --virtual .build-deps freetype libpng libjpeg-turbo libmcrypt freetype-dev libpng-dev libjpeg-turbo-dev libmcrypt-dev \
+    && docker-php-ext-install -j$(nproc) iconv mcrypt zip pdo_mysql opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install iconv mcrypt zip pdo_mysql gd opcache\
+    && docker-php-ext-install -j$(nproc) gd \
     && apk del .build-deps
 
 
