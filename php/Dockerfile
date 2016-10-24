@@ -1,5 +1,7 @@
 FROM php:alpine
 
+WORKDIR /var/www/html
+
 COPY ./php.ini /usr/local/etc/php/
 
 ENV TZ=Asia/Shanghai
