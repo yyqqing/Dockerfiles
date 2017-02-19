@@ -8,7 +8,7 @@ ENV TOMCAT_VERSION_MAJOR=8 \
 # Download && install
 # COPY ./apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz ./apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz.md5 ./
 
-RUN apk add --update curl && \
+RUN apk add --update curl openssl && \
   curl -LO https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_VERSION_MAJOR}/v${TOMCAT_VERSION_FULL}/bin/apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz && curl -LO https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_VERSION_MAJOR}/v${TOMCAT_VERSION_FULL}/bin/apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz.md5 && \
   md5sum -c ./apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz.md5 &&\
   gunzip -c ./apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz | tar -xf - -C /opt &&\
