@@ -30,5 +30,5 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \ 
   && php /tmp/composer-setup.php --install-dir=/usr/local/bin/ --filename=composer \
   && php -r "unlink('/tmp/composer-setup.php');" \
-  && php -r "composer config -g repo.packagist composer https://packagist.phpcomposer.com"
+  && composer config -g repo.packagist composer https://packagist.phpcomposer.com
     
