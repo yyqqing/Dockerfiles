@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" = "stop" ]
+then
+	docker stop mysqlserver
+else
+	docker run --name mysqlserver --rm -e MYSQL_ROOT_PASSWORD=root -d yyqqing/mysql
+fi
