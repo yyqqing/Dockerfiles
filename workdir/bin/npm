@@ -1,1 +1,1 @@
-docker run --rm -v "$PWD":/usr/src/app yyqqing/node npm --color always --progress true $@
+docker run --rm -v "$PWD":/usr/src/app -v ~/.npm:/root/.npm yyqqing/node npm --color always --progress true $@
