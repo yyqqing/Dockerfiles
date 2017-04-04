@@ -1,0 +1,1 @@
+docker run --rm -v "$PWD":/usr/src/app yyqqing/node node $@
