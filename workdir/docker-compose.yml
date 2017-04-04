@@ -28,7 +28,7 @@ services:
       - ./conf/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf:ro
       - ./data/mysql:/var/lib/mysql:rw
   redis:
-    image: redis:alpine
+    image: yyqqing/redis:alpine
     ports:
       - "26379:6379"
 # networks:

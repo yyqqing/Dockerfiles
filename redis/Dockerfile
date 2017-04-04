@@ -2,7 +2,7 @@ FROM redis:alpine
 
 MAINTAINER yyqqing <y_yqing@163.com>
 
-RUN echo never > /sys/kernel/mm/transparent_hugepage/enabled
+# RUN echo never > /sys/kernel/mm/transparent_hugepage/enabled
 
 # RUN_MODE = master / slave / sentinel
 ENV RUN_MODE=master                 \
