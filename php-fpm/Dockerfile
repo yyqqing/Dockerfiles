@@ -5,7 +5,7 @@ COPY ./php.ini /usr/local/etc/php/
 ENV TZ=Asia/Shanghai
 RUN mv /etc/localtime /etc/localtime_old && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && ln -sf /dev/stderr /var/log/php_errors.log
 
-ENV PHPREDIS_VERSION 3.1.6
+ENV PHPREDIS_VERSION 4.0.0
 
 RUN apk update && apk upgrade --update \
     && apk add --no-cache --update openssl freetype libpng libjpeg-turbo \
