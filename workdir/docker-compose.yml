@@ -1,4 +1,4 @@
-version: "3"
+version: "3.1"
 services:
   nginx:
     image: nginx:alpine
@@ -20,17 +20,21 @@ services:
       - "9000"
     volumes:
       - ./www:/var/www/html:ro
+      - ./logs/php-fpm/:/var/log:rw
+      - ./conf/php.ini:/usr/local/etc/php/php.ini:ro
   mysql:
     image: yyqqing/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
     volumes:
       - ./conf/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf:ro
       - ./data/mysql:/var/lib/mysql:rw
   redis:
     image: yyqqing/redis
     ports:
-      - "26379:6379"
+      - "6379:6379"
 # networks:
 #   frontend:
 #   backend:
