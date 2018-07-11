@@ -7,7 +7,7 @@ RUN mv /etc/localtime /etc/localtime_old && ln -snf /usr/share/zoneinfo/$TZ /etc
 
 ENV PHPREDIS_VERSION 4.0.2
 
-RUN apk update && apk upgrade --update \
+RUN apk --no-cache update && apk --no-cache upgrade --update \
     && apk add --no-cache --update openssl freetype libpng libjpeg-turbo \
     && apk add --no-cache --virtual .build-deps freetype-dev libpng-dev libjpeg-turbo-dev \
     && docker-php-source extract && touch /usr/src/php/.docker-delete-me \
@@ -15,7 +15,8 @@ RUN apk update && apk upgrade --update \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
+    && cp /usr/src/php/ext/mysqlnd/config9.m4 /usr/src/php/ext/mysqlnd/config.m4 \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
-    && docker-php-ext-install iconv zip pdo_mysql gd opcache redis\
+    && docker-php-ext-install iconv zip mysqlnd pdo pdo_mysql gd opcache redis\
     && apk del .build-deps && rm -rf /var/cache/apk/* \
     && docker-php-source delete
