@@ -9,7 +9,7 @@ ENV PHPREDIS_VERSION 4.0.2
 
 RUN apk --no-cache update && apk --no-cache upgrade --update \
     && apk add --no-cache --update openssl freetype libpng libjpeg-turbo \
-    && apk add --no-cache --virtual .build-deps freetype-dev libpng-dev libjpeg-turbo-dev \
+    && apk add --no-cache --virtual .build-deps freetype-dev libpng-dev libjpeg-turbo-dev openssl-dev\
     && docker-php-source extract && touch /usr/src/php/.docker-delete-me \
     && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar xfz /tmp/redis.tar.gz \
