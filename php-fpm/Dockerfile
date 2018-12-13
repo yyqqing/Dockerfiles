@@ -9,14 +9,14 @@ ENV PHPREDIS_VERSION 4.2.0
 
 RUN apk --no-cache update && apk --no-cache upgrade --update \
     && apk add --no-cache --update libzip openssl freetype libpng libjpeg-turbo \
-    && apk add --no-cache --virtual .build-deps libzip-dev libssl-dev openssl-dev freetype-dev libpng-dev libjpeg-turbo-dev \
+    && apk add --no-cache --virtual .build-deps libzip-dev openssl-dev freetype-dev libpng-dev libjpeg-turbo-dev \
     && docker-php-source extract && touch /usr/src/php/.docker-delete-me \
     && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
-    && cp /usr/src/php/ext/mysqlnd/config9.m4 /usr/src/php/ext/mysqlnd/config.m4 \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
-    && docker-php-ext-install iconv zip mysqlnd pdo pdo_mysql gd opcache redis\
+    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+    && docker-php-ext-install iconv zip pdo pdo_mysql gd opcache redis\
     && apk del .build-deps && rm -rf /var/cache/apk/* \
     && docker-php-source delete
