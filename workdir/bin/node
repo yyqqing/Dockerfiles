@@ -1,1 +1,1 @@
-docker run --rm -v "$PWD":/usr/src/app yyqqing/node node $@
+docker run --rm --tty -v "$PWD":/usr/src/app yyqqing/node node $@
