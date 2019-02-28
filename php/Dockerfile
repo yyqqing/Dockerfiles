@@ -30,3 +30,11 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \ 
   && php /tmp/composer-setup.php --install-dir=/usr/local/bin/ --filename=composer \
   && php -r "unlink('/tmp/composer-setup.php');"
+
+RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && \
+    cp /tmp/phpcs.phar /usr/local/bin/phpcs && \
+    chmod +x /usr/local/bin/phpcs
+RUN /usr/local/bin/phpcs --config-set show_progress 1 && \
+    /usr/local/bin/phpcs --config-set colors 1 && \
+    /usr/local/bin/phpcs --config-set report_width 140 && \
+    /usr/local/bin/phpcs --config-set encoding utf-8
