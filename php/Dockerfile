@@ -32,9 +32,14 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && php -r "unlink('/tmp/composer-setup.php');"
 
 RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && \
-    cp /tmp/phpcs.phar /usr/local/bin/phpcs && \
+    mv /tmp/phpcs.phar /usr/local/bin/phpcs && \
     chmod +x /usr/local/bin/phpcs
 RUN /usr/local/bin/phpcs --config-set show_progress 1 && \
     /usr/local/bin/phpcs --config-set colors 1 && \
     /usr/local/bin/phpcs --config-set report_width 140 && \
     /usr/local/bin/phpcs --config-set encoding utf-8
+RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar && \
+    mv /tmp/phpcbf.phar /usr/local/bin/phpcbf && \
+    chmod +x /usr/local/bin/phpcbf
+CMD ["phpcbf"]
+CMD ["phpcs"]
