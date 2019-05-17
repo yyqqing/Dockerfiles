@@ -5,7 +5,7 @@ WORKDIR /var/www/html
 COPY ./php.ini /usr/local/etc/php/
 
 ENV TZ=Asia/Shanghai
-RUN [ -f /etc/localtime ] && mv /etc/localtime /etc/localtime_old
+RUN if [ -f /etc/localtime ] ; then mv /etc/localtime /etc/localtime_old ; fi
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && ln -sf /dev/stderr /var/log/php_errors.log
 
 RUN apk upgrade --update && apk add --no-cache --update libzip openssl freetype libpng libjpeg-turbo \

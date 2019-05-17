@@ -3,7 +3,7 @@ FROM php:fpm-alpine
 COPY ./php.ini /usr/local/etc/php/
 
 ENV TZ=Asia/Shanghai
-RUN [ -f /etc/localtime ] && mv /etc/localtime /etc/localtime_old
+RUN if [ -f /etc/localtime ] ; then mv /etc/localtime /etc/localtime_old ; fi
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && ln -sf /dev/stderr /var/log/php_errors.log
 
 ENV PHPREDIS_VERSION 4.2.0
