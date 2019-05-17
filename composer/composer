@@ -1,4 +1,4 @@
- #!/bin/sh
- export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
- echo "Current working directory: '"$(pwd)"'"
- docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh --tty yyqqing/composer $@
+#!/bin/sh
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+echo "Current working directory: '"$(pwd)"'"
+COMPOSER_HOME=$HOME/.config/composer COMPOSER_CACHE_DIR=$HOME/.cache/composer docker run --rm --interactive --tty --env COMPOSER_HOME --env COMPOSER_CACHE_DIR --volume $PWD:/app --volume $COMPOSER_HOME:$COMPOSER_HOME --volume $COMPOSER_CACHE_DIR:$COMPOSER_CACHE_DIR yyqqing/composer $@
