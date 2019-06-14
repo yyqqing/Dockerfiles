@@ -11,6 +11,8 @@ services:
       - ./conf/nginx.conf.d:/etc/nginx/conf.d:ro
       - ./logs:/var/log/nginx/:rw
       - ./www:/usr/share/nginx/html:ro
+    networks:
+      - backend
   php-fpm:
     image: yyqqing/php-fpm
     links:
@@ -22,6 +24,8 @@ services:
       - ./www:/var/www/html:ro
       - ./logs/php-fpm/:/var/log:rw
       - ./conf/php.ini:/usr/local/etc/php/php.ini:ro
+    networks:
+      - backend
   mysql:
     image: yyqqing/mysql
     command:
@@ -34,10 +38,15 @@ services:
     volumes:
       - ./conf/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf:ro
       - ./data/mysql:/var/lib/mysql:rw
+    networks:
+      - backend
   redis:
     image: yyqqing/redis
     ports:
       - "6379:6379"
-# networks:
-#   frontend:
-#   backend:
+    networks:
+      - backend
+networks:
+  backend:
+    name: nginx_default
+    driver: bridge
