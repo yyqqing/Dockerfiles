@@ -10,7 +10,7 @@ ENV PHPREDIS_VERSION 5.1.1
 
 RUN apk --no-cache update && apk --no-cache upgrade --update \
     && apk add --no-cache --update libzip openssl freetype libpng libjpeg-turbo \
-    && apk add --no-cache --virtual .build-deps libzip-dev openssl-dev freetype-dev libpng-dev libjpeg-turbo-dev \
+    && apk add --no-cache --virtual .build-deps libzip-dev openssl-dev freetype-dev libpng-dev libjpeg-turbo-dev libicu-dev \
     && docker-php-source extract && touch /usr/src/php/.docker-delete-me \
     && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar xfz /tmp/redis.tar.gz \
@@ -18,6 +18,6 @@ RUN apk --no-cache update && apk --no-cache upgrade --update \
     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
-    && docker-php-ext-install iconv zip pdo pdo_mysql mysqli gd opcache redis\
+    && docker-php-ext-install iconv zip pdo pdo_mysql mysqli gd opcache redis intl\
     && apk del .build-deps && rm -rf /var/cache/apk/* \
     && docker-php-source delete
