@@ -8,8 +8,8 @@ ENV TZ=Asia/Shanghai
 RUN if [ -f /etc/localtime ] ; then mv /etc/localtime /etc/localtime_old ; fi
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && ln -sf /dev/stderr /var/log/php_errors.log
 
-RUN apk upgrade --update && apk add --no-cache --update libzip openssl freetype libpng libjpeg-turbo \
-    && apk add --no-cache --virtual .build-deps libzip-dev freetype-dev libpng-dev libjpeg-turbo-dev icu icu-dev icu-libs \
+RUN apk upgrade --update && apk add --no-cache --update libzip openssl freetype libpng libjpeg-turbo icu icu-libs \
+    && apk add --no-cache --virtual .build-deps libzip-dev freetype-dev libpng-dev libjpeg-turbo-dev icu-dev \
     && docker-php-ext-install iconv zip pdo_mysql mysqli opcache \
     && docker-php-ext-configure intl \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
