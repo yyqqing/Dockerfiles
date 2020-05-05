@@ -6,7 +6,7 @@ ENV TZ=Asia/Shanghai
 RUN if [ -f /etc/localtime ] ; then mv /etc/localtime /etc/localtime_old ; fi
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && ln -sf /dev/stderr /var/log/php_errors.log
 
-ENV PHPREDIS_VERSION 5.1.1
+ENV PHPREDIS_VERSION 5.2.1
 
 RUN apk --no-cache update && apk --no-cache upgrade --update \
     && apk add --no-cache --update libzip openssl freetype libpng libjpeg-turbo icu icu-libs \

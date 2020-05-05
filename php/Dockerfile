@@ -17,7 +17,7 @@ RUN apk upgrade --update && apk add --no-cache --update libzip openssl freetype 
     && apk del .build-deps && rm -rf /var/cache/apk/*
 
 
-ENV PHPREDIS_VERSION 4.2.0
+ENV PHPREDIS_VERSION 5.2.1
 RUN docker-php-source extract && touch /usr/src/php/.docker-delete-me \
     && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar xfz /tmp/redis.tar.gz \
